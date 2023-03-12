@@ -5,12 +5,12 @@ import static org.junit.Assert.*;
 
 public class CarMapTest {
 
-    private CarMap carMap;
+    private CarMap<CarOwner, Car> carMap;
 
 
     @Before
     public void setUp() throws Exception {
-        carMap = new CarHashMap();
+        carMap = new CarHashMap<>();
     }
 
     @Test

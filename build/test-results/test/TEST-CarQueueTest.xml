@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CarQueueTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-03-11T20:42:29" hostname="DESKTOP-GVIQ2GB" time="0.016">
-  <properties/>
-  <testcase name="add" classname="CarQueueTest" time="0.015"/>
-  <testcase name="peek" classname="CarQueueTest" time="0.001"/>
-  <testcase name="poll" classname="CarQueueTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

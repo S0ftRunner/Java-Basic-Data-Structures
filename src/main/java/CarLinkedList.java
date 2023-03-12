@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class CarLinkedList implements CarList, CarQueue {
+public class CarLinkedList<T> implements CarList<T>, CarQueue<T> {
 
 
     private Node first;
@@ -8,19 +8,19 @@ public class CarLinkedList implements CarList, CarQueue {
     private int size = 0;
 
     @Override
-    public Car get(int index) {
+    public T get(int index) {
         checkIndex(index);
         return getNode(index).value;
     }
 
     @Override
-    public boolean add(Car car) {
+    public boolean add(T element) {
         if (size == 0) {
-            first = new Node(null, car, null);
+            first = new Node(null, element, null);
             last = first;
         } else {
             Node secondLast = last;
-            last = new Node(secondLast, car, null);
+            last = new Node(secondLast, element, null);
             secondLast.next = last;
         }
         size++;
@@ -28,18 +28,18 @@ public class CarLinkedList implements CarList, CarQueue {
     }
 
     @Override
-    public boolean add(Car car, int index) {
+    public boolean add(T element, int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
         if (index == size) {
-            return add(car);
+            return add(element);
         }
 
 
         Node nodeNext = getNode(index);
         Node nodePrevious = nodeNext.previous;
-        Node newNode = new Node(nodePrevious, car, nodeNext);
+        Node newNode = new Node(nodePrevious, element, nodeNext);
         nodeNext.previous = newNode;
         if (nodePrevious != null) {
             nodePrevious.next = newNode;
@@ -51,8 +51,8 @@ public class CarLinkedList implements CarList, CarQueue {
     }
 
     @Override
-    public boolean remove(Car car) {
-       int index = findElement(car);
+    public boolean remove(T element) {
+       int index = findElement(element);
        if (index != - 1) {
            return removeAt(index);
        }
@@ -60,8 +60,8 @@ public class CarLinkedList implements CarList, CarQueue {
     }
 
     @Override
-    public boolean contains(Car car) {
-        return findElement(car) != - 1;
+    public boolean contains(T element) {
+        return findElement(element) != - 1;
     }
 
     @Override
@@ -105,12 +105,12 @@ public class CarLinkedList implements CarList, CarQueue {
         return node;
     }
 
-    private static class Node {
+    private class Node {
         private Node previous;
-        private Car value;
+        private T value;
         private Node next;
 
-        public Node(Node previous, Car value, Node next) {
+        public Node(Node previous, T value, Node next) {
             this.previous = previous;
             this.value = value;
             this.next = next;
@@ -123,10 +123,10 @@ public class CarLinkedList implements CarList, CarQueue {
         }
     }
 
-    private int findElement(Car car) {
+    private int findElement(T element) {
         Node node = first;
         for (int i = 0; i < size; i++) {
-            if (node.value.equals(car)) {
+            if (node.value.equals(element)) {
                 return i;
             }
             node = node.next;
@@ -135,8 +135,8 @@ public class CarLinkedList implements CarList, CarQueue {
     }
 
     @Override
-    public Iterator<Car> iterator() {
-        return new Iterator<Car>() {
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
 
             private Node node = first;
 
@@ -146,24 +146,24 @@ public class CarLinkedList implements CarList, CarQueue {
             }
 
             @Override
-            public Car next() {
-                Car car = node.value;
+            public T next() {
+                T element = node.value;
                 node = node.next;
-                return car;
+                return element;
             }
         };
     }
 
 
     @Override
-    public Car peek() {
+    public T peek() {
        return size > 0 ? get(0) : null;
     }
 
     @Override
-    public Car poll() {
-        Car car = get(0);
+    public T poll() {
+        T element = get(0);
         removeAt(0);
-        return car;
+        return element;
     }
 }

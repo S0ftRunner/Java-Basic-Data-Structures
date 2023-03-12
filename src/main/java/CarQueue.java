@@ -1,8 +1,8 @@
-public interface CarQueue extends CarCollection {
-    boolean add(Car car);
+public interface CarQueue<T> extends CarCollection<T> {
+    boolean add(T car);
 
-    Car peek(); // возвращает первый элемент из коллекции
+    T peek(); // возвращает первый элемент из коллекции
 
-    Car poll(); // возвращает первый элемент из коллекции и возвращает его
+    T poll(); // возвращает первый элемент из коллекции и возвращает его
 
 }
